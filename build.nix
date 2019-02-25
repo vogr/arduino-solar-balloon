@@ -1,6 +1,6 @@
 {stdenv, callPackage,
 arduino-core,
-directio, bmp280, adafruit-sensor}:
+directio, bmp280, adafruit-sensor, mq135}:
 
 stdenv.mkDerivation rec {
   name = "ballon-solaire";
@@ -19,6 +19,7 @@ stdenv.mkDerivation rec {
     -libraries ${directio}/ \
     -libraries ${bmp280}/ \
     -libraries ${adafruit-sensor}/ \
+    -libraries ${mq135}/ \
     -tools ${ARDUINO_SDK_PATH}/share/arduino/tools/ \
     -tools ${ARDUINO_SDK_PATH}/share/arduino/tools-builder/ \
     -tools ${ARDUINO_SDK_PATH}/share/arduino/hardware/tools/ \

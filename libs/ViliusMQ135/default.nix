@@ -1,13 +1,13 @@
 {stdenv}:
 
 stdenv.mkDerivation rec {
-  name = "AdafruitBMP280-${version}";
+  name = "Vilius-MQ135-${version}";
   version = "1.0.0";
 
   src = builtins.fetchGit {
-    url = "https://github.com/adafruit/Adafruit_BMP280_Library.git";
+    url = "https://github.com/ViliusKraujutis/MQ135.git";
     ref = "master";
-    rev = "d20a271b3c166145b50fdf2dc382324ab8e37b55";
+    rev = "fb1bed6fff7418777930cdf8173bb6fb5c7e70a9";
   };
   installPhase = ''
     mkdir -p $out/lib && \

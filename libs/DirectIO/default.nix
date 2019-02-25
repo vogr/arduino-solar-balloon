@@ -10,7 +10,7 @@ stdenv.mkDerivation rec {
     rev = "9d7176d2f8bb5015db2457b2e502e49fe999f40b";
   };
   installPhase = ''
-    mkdir -p $out/DirectIO && \
-    cp -r . $out/DirectIO
+    mkdir -p $out/lib && \
+    cp -r . $out/lib
   '';
 }

@@ -1,10 +1,14 @@
 { pkgs ? import <nixpkgs> {} }:
+let
+  libs = rec {
+    directio = pkgs.callPackage ./libs/DirectIO {};
+    bmp280 = pkgs.callPackage ./libs/AdafruitBMP280 {};
+    adafruit-sensor = pkgs.callPackage ./libs/AdafruitSensor {};
+    mq135 = pkgs.callPackage ./libs/ViliusMQ135 {} ;
+  };
+in
 rec {
-  inherit pkgs;
-  directio = pkgs.callPackage ./libs/DirectIO {};
-  bmp280 = pkgs.callPackage ./libs/AdafruitBMP280 {};
-  adafruit-sensor = pkgs.callPackage ./libs/AdafruitSensor {};
-  ballon-solaire = pkgs.callPackage ./build.nix { inherit directio bmp280 adafruit-sensor;};
+  ballon-solaire = pkgs.callPackage ./build.nix libs;
   avrdude = "${pkgs.arduino-core}/share/arduino/hardware/tools/avr/bin/avrdude";
   deployScript = pkgs.writeShellScriptBin "deployScript.sh" ''
     ${avrdude} \

@@ -10,7 +10,7 @@ stdenv.mkDerivation rec {
     rev = "a78507261d6854ff5514604a4b17183758e8c146";
   };
   installPhase = ''
-    mkdir -p $out/AdafruitSensor && \
-    cp -r . $out/AdafruitSensor
+    mkdir -p $out/lib && \
+    cp -r . $out/lib
   '';
 }
