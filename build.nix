@@ -24,7 +24,6 @@ stdenv.mkDerivation rec {
     -tools ${ARDUINO_SDK_PATH}/share/arduino/tools/ \
     -tools ${ARDUINO_SDK_PATH}/share/arduino/tools-builder/ \
     -tools ${ARDUINO_SDK_PATH}/share/arduino/hardware/tools/ \
-    -verbose \
     -warnings all \
     main.cpp
   '';
