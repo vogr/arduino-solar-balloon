@@ -12,3 +12,7 @@ debug:
 .PHONY: deploy
 deploy:
 	nix-shell . -A deployEnv --run "deployScript.sh"
+
+.build: serial
+serial:
+	picocom /dev/ttyACM0
