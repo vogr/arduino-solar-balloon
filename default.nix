@@ -33,8 +33,8 @@ rec {
     -D \
     -Uflash:w:${ballon-solaire}/main.cpp.hex:i
   '';
-  deployEnv = pkgs.stdenv.mkDerivation {
-    name = "deploy-env";
+  deployShell = pkgs.mkShell {
+    name = "deploy-shell";
     buildInputs = [ deployScript ];
   };
 }

@@ -11,7 +11,7 @@ debug:
 
 .PHONY: deploy
 deploy:
-	nix-shell . -A deployEnv --run "deployScript.sh"
+	nix-shell . -A deployShell --run "deployScript.sh"
 
 .build: serial
 serial:

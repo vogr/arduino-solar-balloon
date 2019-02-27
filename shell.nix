@@ -2,7 +2,7 @@
 let
   ballon-solaire = (import ./default.nix {}).ballon-solaire;
 in
-  pkgs.buildEnv {
+  pkgs.mkShell {
     name = "shell";
     paths = [ ballon-solaire ];
   }
