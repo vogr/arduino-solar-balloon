@@ -15,4 +15,4 @@ deploy:
 
 .build: serial
 serial:
-	picocom /dev/ttyACM0
+	nix-shell "<nixpkgs>" --pure -p picocom --run "picocom /dev/ttyACM0"
