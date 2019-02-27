@@ -3,7 +3,7 @@ TARGET = ballon-solaire
 
 .PHONY: build
 build:
-	nix-build -A $(TARGET)
+	nix-build . -A $(TARGET)
 
 .PHONY: build
 debug:
