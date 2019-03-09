@@ -9,11 +9,14 @@
 
 #include <MQ135.h>
 
+#define USE_SERIAL true
 #define USE_SD true
 
+#define PRINT if(USE_SERIAL)Serial
+
 // TODO: Tweak to local values!
-static const float SEA_LEVEL_PRESSURE = 1013.25;
-static const float HUMIDITY = 25.0;
+static const float SEA_LEVEL_PRESSURE = 1023.0;
+static const float HUMIDITY = 80.0;
 
 static const int DELAY_TIME = 5000; //ms
 
@@ -24,34 +27,34 @@ Output<13> led_pin;
 
 void setup() 
 {
-  Serial.begin(9600);
+  PRINT.begin(9600);
 
 #ifdef USE_SD
-  Serial.print("Initializing SD card...");
+  PRINT.print("Initializing SD card...");
   if (!SD.begin(10)) {
-    Serial.println(" Card failed, or not present.");
+    PRINT.println(" Card failed, or not present.");
   }
   else {
-    Serial.println(" Card initialized.");
+    PRINT.println(" Card initialized.");
   }
 #endif
 
-  Serial.println(F("Initializing BMP280..."));
+  PRINT.println(F("Initializing BMP280..."));
   bool status = bmp.begin(0x76);
   if(!status) {  
-    Serial.println(" Could not find a valid BMP280 sensor, check wiring!");
+    PRINT.println(" Could not find a valid BMP280 sensor, check wiring!");
     while (1);
     //TODO: use "return;" instead?
   }
   else {
-    Serial.println(" BMP280 initiliazed.");
+    PRINT.println(" BMP280 initiliazed.");
   }
 }
 
 void loop()      
 {    
   led_pin.write(HIGH);
-  delay(5);
+  delay(10);
   led_pin.write(LOW);
 
   int pollution = analogRead(0);
@@ -66,27 +69,27 @@ void loop()
   float ppm = mq135.getPPM();
   float correctedPPM = mq135.getCorrectedPPM(temperature, HUMIDITY);
 
-  Serial.print(pollution);
-  Serial.print(",");
-  Serial.print(temperature);
-  Serial.print(",");
-  Serial.print(pressure);
-  Serial.print(",");
-  Serial.print(altitude);
-  Serial.print(",");
-  Serial.print(rzero);
-  Serial.print(",");
-  Serial.print(correctedRZero);
-  Serial.print(",");
-  Serial.print(resistance);
-  Serial.print(",");
-  Serial.print(ppm);
-  Serial.print(",");
-  Serial.print(correctedPPM);
-  Serial.println();
+  PRINT.print(pollution);
+  PRINT.print(",");
+  PRINT.print(temperature);
+  PRINT.print(",");
+  PRINT.print(pressure);
+  PRINT.print(",");
+  PRINT.print(altitude);
+  PRINT.print(",");
+  PRINT.print(rzero);
+  PRINT.print(",");
+  PRINT.print(correctedRZero);
+  PRINT.print(",");
+  PRINT.print(resistance);
+  PRINT.print(",");
+  PRINT.print(ppm);
+  PRINT.print(",");
+  PRINT.print(correctedPPM);
+  PRINT.println();
 
 #ifdef USE_SD
-  Serial.print("Writing to data.txt...");
+  PRINT.print("Writing to data.txt...");
   File data = SD.open("data.txt", FILE_WRITE);
   if (data) {
     data.print(pollution);
@@ -100,12 +103,12 @@ void loop()
     data.print(correctedPPM);
     data.println();
     data.close();
-    Serial.println(" Done.");
+    PRINT.println(" Done.");
   }
   else {
-    Serial.println(" Error opening data.txt");
+    PRINT.println(" Error opening data.txt");
   }
 #endif
 
-  delay(DELAY_TIME - 5);
+  delay(DELAY_TIME - 10);
 }

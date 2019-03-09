@@ -11,6 +11,8 @@ stdenv.mkDerivation rec {
   };
   installPhase = ''
     mkdir -p $out/lib && \
-    cp -r . $out/lib
+    cp -r . $out/lib && \
+    sed -i.bak 's/\(#define RZERO\).*/\1 85.5/g; s/\(#define ATMOCO2\).*/\1 410.0/g' $out/lib/MQ135.h && \
+    rm $out/lib/MQ135.h.bak
   '';
 }

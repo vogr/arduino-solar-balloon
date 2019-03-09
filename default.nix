@@ -37,4 +37,4 @@ rec {
     name = "deploy-shell";
     buildInputs = [ deployScript ];
   };
-}
+} // libs
