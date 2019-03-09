@@ -10,7 +10,7 @@ let
       src = mq135;
       buildPhase = ''
         substituteInPlace lib/MQ135.h \
-          --replace "#define RZERO 76.63" "#define RZERO 1800.0" \
+          --replace "#define RZERO 76.63" "#define RZERO 80.0" \
           --replace "#define ATMOCO2 397.13" "#define ATMOCO2 410.90"
       '';
       installPhase = ''
