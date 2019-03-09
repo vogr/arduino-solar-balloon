@@ -1,13 +1,11 @@
-{stdenv}:
+{stdenv, fetchurl}:
 
 stdenv.mkDerivation rec {
   name = "Arduino-DirectIO-${version}";
-  version = "1.0.0";
-
-  src = builtins.fetchGit {
-    url = "https://github.com/mmarchetti/DirectIO.git";
-    ref = "master";
-    rev = "9d7176d2f8bb5015db2457b2e502e49fe999f40b";
+  version = "1.2.0";
+  src = fetchurl {
+    url = "https://github.com/mmarchetti/DirectIO/archive/v1.2.tar.gz";
+    sha256 = "1kqzfjarg8ipq7v53lrj6djzd3prmwjqgar3y42ih4g70hq6i1gq";
   };
   installPhase = ''
     mkdir -p $out/lib && \
